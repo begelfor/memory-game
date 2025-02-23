@@ -1,22 +1,20 @@
 <template>
   <div class="app">
-    <header>
+    <div class="sidebar">
       <h1>Memory Game</h1>
-      <div class="controls-container">
-        <div class="game-controls">
-          <select v-model="selectedSize" @change="resetGame">
-            <option v-for="size in gameSizes" :key="size.pairs" :value="size">
-              {{ size.name }}
-            </option>
-          </select>
-        </div>
-        <ScoreBoard 
-          :moves="moves"
-          :matches="matches"
-          @reset-game="resetGame"
-        />
+      <div class="game-controls">
+        <select v-model="selectedSize" @change="resetGame">
+          <option v-for="size in gameSizes" :key="size.pairs" :value="size">
+            {{ size.name }}
+          </option>
+        </select>
       </div>
-    </header>
+      <ScoreBoard 
+        :moves="moves"
+        :matches="matches"
+        @reset-game="resetGame"
+      />
+    </div>
     <main>
       <GameBoard 
         ref="gameBoard"
@@ -79,17 +77,22 @@ export default {
 .app {
   height: 100vh;
   display: flex;
-  flex-direction: column;
   padding: 16px;
+  gap: 24px;
   box-sizing: border-box;
 }
 
-header {
+.sidebar {
+  width: 250px;
   flex-shrink: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
 }
 
 h1 {
-  margin: 0 0 16px 0;
+  margin: 0;
+  font-size: 1.5em;
 }
 
 main {
@@ -97,18 +100,8 @@ main {
   min-height: 0; /* Important for flex container */
 }
 
-.controls-container {
-  display: flex;
-  align-items: center;
-  gap: 16px;
-  margin-bottom: 16px;
-}
-
-.game-controls {
-  margin-bottom: 0;
-}
-
 .game-controls select {
+  width: 100%;
   padding: 8px;
   font-size: 16px;
   border-radius: 4px;

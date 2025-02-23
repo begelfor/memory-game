@@ -5,8 +5,20 @@
     @click="handleClick"
   >
     <div class="card-inner">
-      <div class="card-front">?</div>
-      <div class="card-back">{{ card.value }}</div>
+      <div class="card-front">
+        <img src="../assets/card-back.svg" alt="card pattern" class="card-pattern">
+      </div>
+      <div class="card-back">
+        <div class="card-content">
+          <span class="card-word">{{ card.value }}</span>
+          <img 
+            v-if="card.isMatched" 
+            :src="card.image" 
+            :alt="card.value"
+            class="card-image"
+          >
+        </div>
+      </div>
     </div>
   </div>
 </template>
@@ -31,7 +43,7 @@ export default {
       // Create speech synthesis utterance
       const utterance = new SpeechSynthesisUtterance(word)
       utterance.lang = 'en-US' // Set language to English
-      utterance.rate = 0.9 // Slightly slower rate for clarity
+      utterance.rate = 0.8 // Slightly slower rate for clarity
       
       // Speak the word
       window.speechSynthesis.speak(utterance)
@@ -68,10 +80,11 @@ export default {
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 1em;
+  font-size: 1.5em;
+  font-weight: bold;
   padding: 8px;
   text-align: center;
-  border: 2px solid #ccc;
+  border: 2px solid #1976D2;
   border-radius: 8px;
   word-break: break-word;
   background-color: white;
@@ -79,12 +92,52 @@ export default {
 
 .card-front {
   z-index: 2;
+  background: #2196F3;
+  overflow: hidden;
 }
 
 .card-back {
   transform: rotateY(180deg);
   background-color: #fff;
   z-index: 1;
+  padding: 4px; /* Reduced padding */
+}
+
+.card-pattern {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0.8;
+}
+
+.card-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  height: 100%;
+}
+
+.card-word {
+  font-size: 1.5em;
+  font-weight: bold;
+}
+
+.card-image {
+  max-width: 80%;
+  max-height: 60%;
+  object-fit: contain;
+  opacity: 0;
+  transition: opacity 0.5s ease;
+}
+
+.card.matched .card-image {
+  opacity: 1;
+}
+
+/* Adjust word size when image is shown */
+.card.matched .card-word {
+  font-size: 1.2em;
 }
 
 .card.matched {

@@ -69,8 +69,9 @@ export default {
       const selectedWords = shuffledWords.slice(0, this.cardPairs)
       
       this.cards = [...selectedWords, ...selectedWords]
-        .map(value => ({
-          value,
+        .map(item => ({
+          value: item.word,
+          image: item.image,
           isFlipped: false,
           isMatched: false
         }))
