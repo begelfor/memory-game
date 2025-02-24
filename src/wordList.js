@@ -19,9 +19,10 @@ export const wordList = [
   {word: 'pancake', image: new URL('./assets/images/pancake.jpg', import.meta.url).href},
   {word: 'sandwich', image: new URL('./assets/images/sandwich.jpg', import.meta.url).href},
   {word: 'ball', image: new URL('./assets/images/ball.png', import.meta.url).href},
-  {word: 'watermelon', image: new URL('./assets/images/watermelon.jpg', import.meta.url).href},
+  {word: 'watermelon', image: new URL('./assets/images/watermelon.png', import.meta.url).href},
   {word: 'tiger', image: new URL('./assets/images/tiger.jpg', import.meta.url).href},
   {word: 'dragon', image: new URL('./assets/images/dragon.jpg', import.meta.url).href},
   {word: 'waffle', image: new URL('./assets/images/waffle.jpg', import.meta.url).href},
   {word: 'mouse', image: new URL('./assets/images/mouse.jpg', import.meta.url).href},
+  {word: 'hat', image: new URL('./assets/images/hat.jpg', import.meta.url).href},
 ]; 
