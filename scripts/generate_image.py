@@ -1,5 +1,6 @@
 import time
 import os
+import yaml
 os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = "/home/evg/.ssh/resonant.json"
 import vertexai
 from vertexai.preview.vision_models import ImageGenerationModel
@@ -31,12 +32,24 @@ def generate_image_from_text(prompt: str, output_file: str, number_of_images: in
             paths.append(path)
         return paths
 
+    
+def generate_missing_images(wordlist_path: str, output_folder: str):
+    with open(wordlist_path, "r") as f:
+        wordlist = []
+        data = yaml.safe_load(f)
+        for category in data.values():
+            wordlist.extend(category)
+    counter = 0
+    for word in wordlist:
+        if not os.path.exists((output_folder / word).with_suffix(".jpg")):
+            if counter > 0:
+                time.sleep(40)
+            print(f"Generating {word}")
+            generate_image_from_text(f"A comics style colorful image of {word} with a white background. Do not make the object anthropomorphic.", output_folder / word)
+            print(f"Done with {word}")
+            counter += 1
+    print(f"Generated {counter} images")
+
 if __name__ == "__main__":
-    wordlist = ['thirteen', 'fourteen', 'fifteen', 'sixteen', 'seventeen', 'eighteen', 'nineteen', 'twenty']
-    path = Path("assets/images")
-    for i, word in enumerate(wordlist):
-        if i>0:
-            time.sleep(40)
-        prompt = f" A comics style image of {word} with a white background"
-        generate_image_from_text(prompt, path / word)
-        print(f"Generated {word}")
+    path = Path("public/images")
+    generate_missing_images("public/wordLists.yaml", path)

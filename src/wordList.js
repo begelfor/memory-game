@@ -1,39 +1,34 @@
 import yaml from 'js-yaml'
 
-// Function to get image URL for a word
-const getImageUrl = (word) => {
-  // Convert word to filename format (lowercase, spaces to hyphens)
-  const filename = word.toLowerCase().replace(/\s+/g, '-')
-  
-  // Try different image extensions
-  const extensions = ['jpg', 'png', 'webp']
-  for (const ext of extensions) {
-    try {
-      return new URL(`./assets/images/${filename}.${ext}`, import.meta.url).href
-    } catch (e) {
-      continue
-    }
-  }
-  
-  // Return a default image if none found
-  return new URL('./assets/images/default.jpg', import.meta.url).href
-}
-
 // Load and process the YAML file
 const loadWordLists = async () => {
   try {
-    const response = await fetch(new URL('./assets/wordLists.yaml', import.meta.url))
+    // Prepend base URL to file paths
+    const baseUrl = import.meta.env.BASE_URL
+    const response = await fetch(`${baseUrl}wordLists.yaml`)
     const yamlText = await response.text()
     const lists = yaml.load(yamlText)
     
     // Convert simple word lists to objects with words and image URLs
     const wordLists = {}
+    
+    // Create array of all words for random selection
+    const allWords = []
     for (const [category, words] of Object.entries(lists)) {
+      // Process regular categories with base URL for images
       wordLists[category] = words.map(word => ({
         word,
-        image: getImageUrl(word)
+        image: `${baseUrl}images/${word}.jpg`
       }))
+      // Add words to allWords array
+      allWords.push(...words)
     }
+    
+    // Add random category with base URL for images
+    wordLists.random = allWords.map(word => ({
+      word,
+      image: `${baseUrl}images/${word}.jpg`
+    }))
     
     return wordLists
   } catch (error) {

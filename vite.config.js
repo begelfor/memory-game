@@ -3,10 +3,11 @@ import vue from '@vitejs/plugin-vue'
 import yaml from '@rollup/plugin-yaml'
 
 export default defineConfig({
-  base: '/shush/',
+  base: process.env.NODE_ENV === 'production' ? '/shush/' : '/',
   plugins: [vue(), yaml()],
   build: {
-    outDir: '../shush/'
+    outDir: '../shush/',
+    target: 'es2022'
   }
 })
 

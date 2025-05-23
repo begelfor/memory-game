@@ -45,7 +45,7 @@ export default {
   computed: {
     gridStyle() {
       const gap = 16; // Increased gap between cards from 8px to 16px
-      const headerHeight = 180; // approximate height of header
+      const headerHeight = 20; // approximate height of header
       const padding = 32; // total vertical padding
       const rows = Math.ceil((this.cardPairs * 2) / this.gridColumns);
       

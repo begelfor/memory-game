@@ -14,6 +14,16 @@ food:
   - apple
   - banana
   - watermelon
+  - orange
+  - bread
+  - rice
+  - soup
+  - porridge
+  - egg
+  - milk
+  - cheese
+  - yogurt
+
 
 animals:
   - cat
@@ -51,6 +61,7 @@ colors:
   - brown
   - black
   - white
+  - gray
 
 other:
   - ball
@@ -63,11 +74,35 @@ other:
   - pants
   - dress
   - weights
-  - car
   - window
   - door
   - cup
   - computer
+  - tree
+  - phone
+  - flower
+  - house
+  - chair
+  - table
+  - bed
+  - sofa
+  - desk
+  - lamp
+  - mirror
+  - clock
+
+transport:
+  - car
+  - bus
+  - train
+  - plane
+  - bicycle
+  - boat
+  - helicopter
+  - rocket
+  - spaceship
+  - truck
+  - motorcycle
 
 numbers:
   - one
@@ -90,3 +125,20 @@ numbers:
   - eighteen
   - nineteen
   - twenty 
+
+people:
+  # - boy
+  # - girl
+  # - man
+  # - woman
+  - teacher
+  - student
+  - doctor
+  - policeman
+  - fireman
+  - farmer
+  - pilot
+  - astronaut
+  - writer
+  - musician
+  - actor

@@ -114,18 +114,22 @@ export default {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 8px;
+  justify-content: center;
   height: 100%;
+  width: 100%;
+  gap: 4px; /* Reduced gap */
 }
 
 .card-word {
-  font-size: 1.5em;
+  font-size: 1.2em;
   font-weight: bold;
+  line-height: 1.2;
+  margin: 0;
 }
 
 .card-image {
-  max-width: 80%;
-  max-height: 60%;
+  max-width: 90%;  /* Increased from 80% */
+  max-height: 75%; /* Increased from 60% */
   object-fit: contain;
   opacity: 0;
   transition: opacity 0.5s ease;
@@ -137,7 +141,7 @@ export default {
 
 /* Adjust word size when image is shown */
 .card.matched .card-word {
-  font-size: 1.2em;
+  font-size: 1em; /* Reduced from 1.2em */
 }
 
 .card.matched {
