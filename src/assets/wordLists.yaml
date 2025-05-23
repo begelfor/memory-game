@@ -1,0 +1,92 @@
+food:
+  - ice cream
+  - donut
+  - pizza
+  - hamburger
+  - cupcake
+  - salad
+  - steak
+  - pasta
+  - cake
+  - pancake
+  - sandwich
+  - waffle
+  - apple
+  - banana
+  - watermelon
+
+animals:
+  - cat
+  - dog
+  - elephant
+  - fish
+  - giraffe
+  - horse
+  - tiger
+  - dragon
+  - mouse
+  - rabbit
+  - bird
+  - snake
+  - frog
+  - turtle
+  - monkey
+  - penguin
+  - koala
+  - duck
+  - rhino
+  - donkey
+  - ant
+  - alligator
+  - bear
+
+colors:
+  - red
+  - blue
+  - green
+  - yellow
+  - purple
+  - orange
+  - pink
+  - brown
+  - black
+  - white
+
+other:
+  - ball
+  - hat
+  - bag
+  - sunglasses
+  - umbrella
+  - shoe
+  - shirt
+  - pants
+  - dress
+  - weights
+  - car
+  - window
+  - door
+  - cup
+  - computer
+
+numbers:
+  - one
+  - two
+  - three
+  - four
+  - five
+  - six
+  - seven
+  - eight
+  - nine
+  - ten
+  - eleven
+  - twelve
+  - thirteen
+  - fourteen
+  - fifteen
+  - sixteen
+  - seventeen
+  - eighteen
+  - nineteen
+  - twenty 

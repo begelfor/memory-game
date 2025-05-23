@@ -13,7 +13,7 @@
 
 <script>
 import Card from './Card.vue'
-import { wordList } from '../wordList.js'
+import { wordLists } from '../wordList.js'
 
 export default {
   name: 'GameBoard',
@@ -29,6 +29,10 @@ export default {
     gridColumns: {
       type: Number,
       default: 4
+    },
+    selectedTopic: {
+      type: String,
+      default: 'food'
     }
   },
   data() {
@@ -64,8 +68,8 @@ export default {
   },
   methods: {
     initializeCards() {
-      // Randomly select words based on cardPairs
-      const shuffledWords = [...wordList].sort(() => Math.random() - 0.5)
+      const topicWords = wordLists[this.selectedTopic]
+      const shuffledWords = [...topicWords].sort(() => Math.random() - 0.5)
       const selectedWords = shuffledWords.slice(0, this.cardPairs)
       
       this.cards = [...selectedWords, ...selectedWords]

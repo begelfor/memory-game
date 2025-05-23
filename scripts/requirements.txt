@@ -1,0 +1,5 @@
+# List your Python dependencies here
+requests
+pandas
+numpy
+google-cloud-aiplatform
