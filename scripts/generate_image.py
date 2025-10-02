@@ -3,10 +3,10 @@ import os
 import yaml
 os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = "/home/evg/.ssh/resonant.json"
 import vertexai
-from vertexai.preview.vision_models import ImageGenerationModel
+from pathlib import Path
+from vertexai.vision_models import ImageGenerationModel
 vertexai.init(project="resonant-feat-256420", location="us-central1")
 model = ImageGenerationModel.from_pretrained("imagen-3.0-generate-002")
-from pathlib import Path
 
 
 def generate_image_from_text(prompt: str, output_file: str, number_of_images: int = 1) -> str | list[str]:
@@ -15,10 +15,10 @@ def generate_image_from_text(prompt: str, output_file: str, number_of_images: in
         # Optional parameters
         number_of_images=number_of_images,
         language="en",
-        # You can't use a seed value and watermark at the same time.
         aspect_ratio="1:1",
-        safety_filter_level="block_some",
-        person_generation="allow_adult",
+        add_watermark=False,
+        # safety_filter_level="block_fewest",
+        # person_generation="allow_adult",
     )
     if number_of_images == 1:
         path = output_file.with_suffix(".jpg")
@@ -40,14 +40,24 @@ def generate_missing_images(wordlist_path: str, output_folder: str):
         for category in data.values():
             wordlist.extend(category)
     counter = 0
-    for word in wordlist:
+    for item in wordlist:
+        if isinstance(item, dict):
+            for word, description in item.items():
+                break
+        else:
+            word = item
+            description = item
         if not os.path.exists((output_folder / word).with_suffix(".jpg")):
             if counter > 0:
                 time.sleep(40)
-            print(f"Generating {word}")
-            generate_image_from_text(f"A comics style colorful image of {word} with a white background. Do not make the object anthropomorphic.", output_folder / word)
-            print(f"Done with {word}")
-            counter += 1
+            print(f"Generating {word} with description {description}")
+            try:
+                generate_image_from_text(f"A cartoon style image of {description} with a white background. Do not make non-human objects anthropomorphic.", output_folder / word)
+                print(f"Done with {word}")
+                counter += 1
+            except Exception as e:
+                print(f"Error generating {word}: {e}")
+
     print(f"Generated {counter} images")
 
 if __name__ == "__main__":

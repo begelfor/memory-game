@@ -23,7 +23,29 @@ food:
   - milk
   - cheese
   - yogurt
+  - juice
+  - milkshake
 
+actions:
+  - eat: man eating
+  - drink: woman drinking
+  - sleep: man sleeping
+  - run: woman running
+  - jump: man  jumping
+  - swim: woman swimming
+  - fly: bird flying
+  - walk: old man walking
+  - dance: woman dancing
+  - cry: man crying
+  - laugh: woman laughing
+  - sing: woman singing
+  - play: man playing
+  - read: woman reading
+  - write: man writing
+  - paint: woman painting
+  - scream: old woman screaming
+  - build: man building
+  - cook: man cooking
 
 animals:
   - cat
@@ -128,7 +150,7 @@ numbers:
 
 people:
   # - boy
-  # - girl
+  - girl
   # - man
   # - woman
   - teacher
@@ -142,3 +164,4 @@ people:
   - writer
   - musician
   - actor
+  
