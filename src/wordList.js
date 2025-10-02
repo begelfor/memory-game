@@ -15,13 +15,29 @@ const loadWordLists = async () => {
     // Create array of all words for random selection
     const allWords = []
     for (const [category, words] of Object.entries(lists)) {
-      // Process regular categories with base URL for images
-      wordLists[category] = words.map(word => ({
-        word,
-        image: `${baseUrl}images/${word}.jpg`
-      }))
-      // Add words to allWords array
-      allWords.push(...words)
+      // Process each word, checking if it's a dictionary
+      wordLists[category] = words.map(word => {
+        // Check if word is a dictionary (object)
+        if (typeof word === 'object' && word !== null) {
+          // Extract the key from the dictionary
+          const wordKey = Object.keys(word)[0]
+          return {
+            word: wordKey,
+            image: `${baseUrl}images/${wordKey}.jpg`
+          }
+        } else {
+          // It's a simple string, use as is
+          return {
+            word,
+            image: `${baseUrl}images/${word}.jpg`
+          }
+        }
+      })
+      // Add words to allWords array (extract keys for dictionaries)
+      const wordsForAll = words.map(word => 
+        typeof word === 'object' && word !== null ? Object.keys(word)[0] : word
+      )
+      allWords.push(...wordsForAll)
     }
     
     // Add random category with base URL for images
