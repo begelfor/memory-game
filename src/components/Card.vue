@@ -32,7 +32,34 @@ export default {
       required: true
     }
   },
+  data() {
+    return {
+      englishVoices: []
+    }
+  },
+  created() {
+    this.initializeVoices()
+  },
   methods: {
+    initializeVoices() {
+      // Get all available voices
+      const voices = window.speechSynthesis.getVoices()
+      
+      // Filter for English-speaking voices
+      this.englishVoices = voices.filter(voice => 
+        voice.lang.startsWith('en') && voice.lang.includes('-')
+      )
+      
+      // If voices are not immediately available, wait for the 'voiceschanged' event
+      if (this.englishVoices.length === 0) {
+        window.speechSynthesis.addEventListener('voiceschanged', () => {
+          const voices = window.speechSynthesis.getVoices()
+          this.englishVoices = voices.filter(voice => 
+            voice.lang.startsWith('en') && voice.lang.includes('-')
+          )
+        })
+      }
+    },
     handleClick() {
       if (!this.card.isFlipped && !this.card.isMatched) {
         this.$emit('card-click', this.card)
@@ -44,6 +71,12 @@ export default {
       const utterance = new SpeechSynthesisUtterance(word)
       utterance.lang = 'en-US' // Set language to English
       utterance.rate = 0.8 // Slightly slower rate for clarity
+      
+      // Use a random English voice if available
+      if (this.englishVoices.length > 0) {
+        const randomIndex = Math.floor(Math.random() * this.englishVoices.length)
+        utterance.voice = this.englishVoices[randomIndex]
+      }
       
       // Speak the word
       window.speechSynthesis.speak(utterance)
